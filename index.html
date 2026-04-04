@@ -26,9 +26,9 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;display=swap" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Outfit:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;display=swap"
         rel="stylesheet" />
     <!-- Icons (deferred — not critical for initial paint) -->
     <link rel="preload" as="style"
@@ -81,6 +81,7 @@
                         "surface-tint": "#bb9eff",
                     },
                     fontFamily: {
+                        "display": ["'Bebas Neue'", "sans-serif"],
                         "headline": ["Outfit", "sans-serif"],
                         "body": ["DM Sans", "sans-serif"],
                         "label": ["DM Sans", "sans-serif"]
@@ -139,6 +140,10 @@
 
             #preloader {
                 display: none !important;
+            }
+
+            .marquee-track {
+                animation: none !important;
             }
         }
 
@@ -206,6 +211,30 @@
             overflow: hidden;
             height: 100vh;
         }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee 35s linear infinite;
+            will-change: transform;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
     </style>
 </head>
 
@@ -227,7 +256,7 @@
         <nav aria-label="Navegação principal" class="flex justify-between items-center px-5 md:px-8 py-4 md:py-6 max-w-screen-2xl mx-auto">
             <div class="flex items-center gap-2">
                 <a href="#" aria-label="HORU Branding — Voltar ao topo">
-                    <img alt="HORU Logo" class="h-14 w-auto" src="imagens/HORU LOGO.svg" />
+                    <img alt="HORU Logo" class="h-10 md:h-14 w-auto" src="imagens/HORU LOGO.svg" />
                 </a>
             </div>
             <!-- Mobile menu button -->
@@ -267,67 +296,64 @@
     <main id="conteudo-principal">
     <!-- Hero Section -->
     <section
-        class="relative min-h-screen flex items-end overflow-hidden pb-16 md:pb-24 pt-32 md:pt-40 bg-surface">
-        <!-- Background Artistic Symbol -->
-        <div class="absolute right-[-15%] top-1/2 -translate-y-1/2 opacity-[0.04] w-[80%] pointer-events-none" aria-hidden="true">
-            <img alt="" class="w-full h-auto" loading="lazy" src="imagens/HORU SIMBOLO.svg" />
+        class="relative flex items-start md:items-end min-h-[calc(100svh-80px)] md:min-h-screen overflow-hidden pt-28 pb-10 md:pb-24 md:pt-40 bg-surface">
+        <div class="absolute right-[-15%] top-1/2 -translate-y-1/2 opacity-[0.05] w-[80%] pointer-events-none select-none" aria-hidden="true">
+            <img alt="" class="w-full h-auto" src="imagens/HORU SIMBOLO.svg" />
         </div>
         <div class="container mx-auto px-5 md:px-8 relative z-10 max-w-screen-2xl">
-            <span class="inline-block text-on-surface/30 font-label tracking-[0.4em] uppercase mb-10 md:mb-16 text-[10px]">Branding estratégico</span>
             <h1
-                class="font-headline font-extrabold text-[clamp(2.5rem,8vw,7.5rem)] text-on-surface leading-[0.88] tracking-[-0.04em] mb-10 md:mb-14 max-w-5xl animate-on-scroll">
+                class="font-display uppercase text-[clamp(3.5rem,12.5vw,10rem)] text-on-surface leading-[0.88] tracking-[0.01em] mb-8 md:mb-14 animate-on-scroll">
                 Você não precisa<br>de um logo. Precisa<br>de presença.
             </h1>
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 lg:gap-20">
+            <div class="w-16 h-[2px] bg-primary mb-8 md:mb-14 animate-on-scroll delay-100"></div>
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-20">
                 <p
-                    class="font-body text-lg md:text-xl text-on-surface/40 max-w-lg leading-relaxed animate-on-scroll delay-100">
+                    class="font-body text-base md:text-xl text-on-surface/40 max-w-lg leading-relaxed animate-on-scroll delay-200">
                     Negócios que se tornam referência não têm apenas identidade visual — têm personalidade. A gente
                     constrói isso do zero, com estratégia e design de alto valor.
                 </p>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-on-scroll delay-200 shrink-0">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-5 animate-on-scroll delay-300 shrink-0">
                     <a href="https://wa.me/5548998007474" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center bg-primary text-on-primary px-8 py-4 sm:px-10 sm:py-5 font-bold text-sm sm:text-base tracking-wide hover:shadow-[0_8px_24px_rgba(123,47,255,0.3)] hover:scale-105 transition-all gap-3">
-                        <span class="material-symbols-outlined text-[20px]" aria-hidden="true">chat</span>
+                        class="inline-flex items-center justify-center bg-primary text-on-primary px-7 py-3.5 sm:px-10 sm:py-5 font-bold text-sm tracking-wide hover:shadow-[0_8px_24px_rgba(123,47,255,0.3)] hover:scale-105 transition-all">
                         Falar no WhatsApp
                     </a>
-                    <a class="group flex items-center gap-3 text-sm font-label tracking-widest uppercase text-on-surface/40 hover:text-on-surface transition-colors"
+                    <a class="group flex items-center gap-2 text-xs font-label tracking-widest uppercase text-on-surface/30 hover:text-on-surface transition-colors"
                         href="#portfolio">
-                        Ver portfólio
+                        Portfólio
                         <span
-                            class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-y-1">arrow_downward</span>
+                            class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-y-1">south</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+    <!-- Marquee Strip -->
+    <div class="overflow-hidden border-y border-outline-variant/20 py-4 bg-surface-container-low" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Branding</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Identidade Visual</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Estratégia de Marca</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Alto Padrão</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Design Estratégico</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Posicionamento</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Branding</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Identidade Visual</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Estratégia de Marca</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Alto Padrão</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Design Estratégico</span><span class="text-primary/50 px-3 text-xs">×</span><span class="font-display text-sm tracking-[0.3em] uppercase text-on-surface/25 px-10">Posicionamento</span><span class="text-primary/50 px-3 text-xs">×</span>
+        </div>
+    </div>
     <!-- Portfolio Section -->
-    <section class="py-20 md:py-40 bg-surface-container" id="portfolio">
+    <section class="py-14 md:py-32 bg-surface-container" id="portfolio">
         <div class="container mx-auto px-5 md:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8">
-                <div>
-                    <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Arquivo de
-                        Excelência</span>
-                    <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight">Nossos
-                        Projetos</h2>
-                </div>
-                <p class="font-body text-on-surface/30 max-w-xs text-right hidden md:block text-sm leading-relaxed">
-                    Uma curadoria de identidades visuais que definem novos padrões de mercado.
-                </p>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-20 gap-6">
+                <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight">Nossos
+                    Projetos</h2>
+                <span class="text-primary/40 font-display tracking-[0.25em] uppercase text-sm hidden md:block pb-2">003 Trabalhos</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
                 <!-- Card 1 -->
                 <div class="group relative aspect-[3/4] overflow-hidden bg-surface-container-lowest animate-on-scroll">
                     <img loading="lazy"
                         alt="Projeto de identidade visual para Bruno Hékis — Personal Trainer"
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
+                        class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                         src="imagens/Bruno_foto-convertido-de-png-800w.webp"
                         srcset="imagens/Bruno_foto-convertido-de-png-400w.webp 400w, imagens/Bruno_foto-convertido-de-png-800w.webp 800w, imagens/Bruno_foto-convertido-de-png-1200w.webp 1200w"
-                        sizes="(max-width: 768px) 100vw, 33vw" />
+                        sizes="(max-width: 768px) 50vw, 33vw" />
                     <div
-                        class="absolute inset-0 bg-surface/0 group-hover:bg-surface/80 transition-all duration-500 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100">
-                        <span class="text-on-surface-variant font-label text-xs tracking-widest uppercase mb-2">Fitness</span>
-                        <h3 class="font-headline text-3xl font-bold text-on-surface">Bruno Hékis</h3>
-                        <div class="mt-4 w-12 h-px bg-on-surface/30"></div>
+                        class="absolute inset-x-0 bottom-0 p-4 md:p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent md:from-transparent md:via-transparent md:bg-none md:inset-0 md:bg-surface/0 md:group-hover:bg-surface/80 transition-all duration-500 md:opacity-0 md:group-hover:opacity-100 flex flex-col justify-end">
+                        <span class="text-on-surface/60 font-label text-[9px] md:text-xs tracking-widest uppercase mb-1 md:mb-2">Fitness</span>
+                        <h3 class="font-headline text-sm md:text-3xl font-bold text-on-surface">Bruno Hékis</h3>
                     </div>
                 </div>
                 <!-- Card 2 -->
@@ -335,32 +361,29 @@
                     class="group relative aspect-[3/4] overflow-hidden bg-surface-container-lowest mt-0 md:mt-24 animate-on-scroll delay-100">
                     <img loading="lazy"
                         alt="Projeto de identidade visual para Seecon — Contabilidade"
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
+                        class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                         src="imagens/Seecon_foto-convertido-de-png-800w.webp"
                         srcset="imagens/Seecon_foto-convertido-de-png-400w.webp 400w, imagens/Seecon_foto-convertido-de-png-800w.webp 800w, imagens/Seecon_foto-convertido-de-png-1200w.webp 1200w"
-                        sizes="(max-width: 768px) 100vw, 33vw" />
+                        sizes="(max-width: 768px) 50vw, 33vw" />
                     <div
-                        class="absolute inset-0 bg-surface/0 group-hover:bg-surface/80 transition-all duration-500 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100">
-                        <span
-                            class="text-on-surface-variant font-label text-xs tracking-widest uppercase mb-2">Contabilidade</span>
-                        <h3 class="font-headline text-3xl font-bold text-on-surface">Seecon</h3>
-                        <div class="mt-4 w-12 h-px bg-on-surface/30"></div>
+                        class="absolute inset-x-0 bottom-0 p-4 md:p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent md:from-transparent md:via-transparent md:bg-none md:inset-0 md:bg-surface/0 md:group-hover:bg-surface/80 transition-all duration-500 md:opacity-0 md:group-hover:opacity-100 flex flex-col justify-end">
+                        <span class="text-on-surface/60 font-label text-[9px] md:text-xs tracking-widest uppercase mb-1 md:mb-2">Contabilidade</span>
+                        <h3 class="font-headline text-sm md:text-3xl font-bold text-on-surface">Seecon</h3>
                     </div>
                 </div>
                 <!-- Card 3 -->
                 <div
-                    class="group relative aspect-[3/4] overflow-hidden bg-surface-container-lowest mt-0 md:mt-12 animate-on-scroll delay-200">
+                    class="group relative aspect-[3/4] overflow-hidden bg-surface-container-lowest col-span-2 md:col-span-1 mt-0 md:mt-12 animate-on-scroll delay-200">
                     <img loading="lazy"
                         alt="Projeto de identidade visual para Lidera — Consultoria Eleitoral"
-                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
+                        class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
                         src="imagens/Lidera_foto-convertido-de-png-800w.webp"
                         srcset="imagens/Lidera_foto-convertido-de-png-400w.webp 400w, imagens/Lidera_foto-convertido-de-png-800w.webp 800w, imagens/Lidera_foto-convertido-de-png-1200w.webp 1200w"
                         sizes="(max-width: 768px) 100vw, 33vw" />
                     <div
-                        class="absolute inset-0 bg-surface/0 group-hover:bg-surface/80 transition-all duration-500 flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100">
-                        <span class="text-on-surface-variant font-label text-xs tracking-widest uppercase mb-2">Consultoria</span>
-                        <h3 class="font-headline text-3xl font-bold text-on-surface">Lidera</h3>
-                        <div class="mt-4 w-12 h-px bg-on-surface/30"></div>
+                        class="absolute inset-x-0 bottom-0 p-4 md:p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent md:from-transparent md:via-transparent md:bg-none md:inset-0 md:bg-surface/0 md:group-hover:bg-surface/80 transition-all duration-500 md:opacity-0 md:group-hover:opacity-100 flex flex-col justify-end">
+                        <span class="text-on-surface/60 font-label text-[9px] md:text-xs tracking-widest uppercase mb-1 md:mb-2">Consultoria</span>
+                        <h3 class="font-headline text-sm md:text-3xl font-bold text-on-surface">Lidera</h3>
                     </div>
                 </div>
             </div>
@@ -368,43 +391,42 @@
     </section>
 
     <!-- Como Trabalhamos Section -->
-    <section class="py-20 md:py-40 bg-surface relative overflow-hidden" id="processo">
+    <section class="py-16 md:py-36 bg-surface relative overflow-hidden" id="processo">
         <div class="container mx-auto px-5 md:px-8 relative z-10">
-            <div class="mb-16 md:mb-28">
-                <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Metodologia</span>
+            <div class="mb-12 md:mb-24">
                 <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight">O Processo
                     Criativo de Alto Valor</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 md:gap-y-16">
-                <div class="flex gap-6 animate-on-scroll">
-                    <span class="font-headline text-6xl md:text-7xl font-extrabold text-on-surface/10 leading-none select-none shrink-0">01</span>
-                    <div class="pt-2">
-                        <h3 class="font-headline text-lg font-bold mb-2 text-on-surface">Estratégia & Briefing</h3>
-                        <p class="text-on-surface/50 text-sm leading-relaxed">Imersão no negócio para entender objetivos,
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 md:gap-y-16">
+                <div class="flex gap-4 md:gap-6 animate-on-scroll">
+                    <span class="font-display text-[5.5rem] md:text-[9rem] text-primary/[0.12] leading-none select-none shrink-0 tabular-nums">01</span>
+                    <div class="pt-1 md:pt-2">
+                        <h3 class="font-headline text-base md:text-lg font-bold mb-1.5 text-on-surface">Estratégia & Briefing</h3>
+                        <p class="text-on-surface/40 text-sm leading-relaxed">Imersão no negócio para entender objetivos,
                             público-alvo e essência da marca.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 animate-on-scroll delay-100">
-                    <span class="font-headline text-6xl md:text-7xl font-extrabold text-on-surface/10 leading-none select-none shrink-0">02</span>
-                    <div class="pt-2">
-                        <h3 class="font-headline text-lg font-bold mb-2 text-on-surface">Conceito & Design</h3>
-                        <p class="text-on-surface/50 text-sm leading-relaxed">Desenvolvimento criativo utilizando
+                <div class="flex gap-4 md:gap-6 animate-on-scroll delay-100">
+                    <span class="font-display text-[5.5rem] md:text-[9rem] text-primary/[0.12] leading-none select-none shrink-0 tabular-nums">02</span>
+                    <div class="pt-1 md:pt-2">
+                        <h3 class="font-headline text-base md:text-lg font-bold mb-1.5 text-on-surface">Conceito & Design</h3>
+                        <p class="text-on-surface/40 text-sm leading-relaxed">Desenvolvimento criativo utilizando
                             inteligência artificial para otimização e precisão técnica.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 animate-on-scroll delay-200">
-                    <span class="font-headline text-6xl md:text-7xl font-extrabold text-on-surface/10 leading-none select-none shrink-0">03</span>
-                    <div class="pt-2">
-                        <h3 class="font-headline text-lg font-bold mb-2 text-on-surface">Apresentação & Ajustes</h3>
-                        <p class="text-on-surface/50 text-sm leading-relaxed">Exibição da identidade viva através de mockups
+                <div class="flex gap-4 md:gap-6 animate-on-scroll delay-200">
+                    <span class="font-display text-[5.5rem] md:text-[9rem] text-primary/[0.12] leading-none select-none shrink-0 tabular-nums">03</span>
+                    <div class="pt-1 md:pt-2">
+                        <h3 class="font-headline text-base md:text-lg font-bold mb-1.5 text-on-surface">Apresentação & Ajustes</h3>
+                        <p class="text-on-surface/40 text-sm leading-relaxed">Exibição da identidade viva através de mockups
                             premium e rodadas de feedback.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 animate-on-scroll delay-300">
-                    <span class="font-headline text-6xl md:text-7xl font-extrabold text-on-surface/10 leading-none select-none shrink-0">04</span>
-                    <div class="pt-2">
-                        <h3 class="font-headline text-lg font-bold mb-2 text-on-surface">Entrega Técnica</h3>
-                        <p class="text-on-surface/50 text-sm leading-relaxed">Envio dos arquivos organizados no Google Drive
+                <div class="flex gap-4 md:gap-6 animate-on-scroll delay-300">
+                    <span class="font-display text-[5.5rem] md:text-[9rem] text-primary/[0.12] leading-none select-none shrink-0 tabular-nums">04</span>
+                    <div class="pt-1 md:pt-2">
+                        <h3 class="font-headline text-base md:text-lg font-bold mb-1.5 text-on-surface">Entrega Técnica</h3>
+                        <p class="text-on-surface/40 text-sm leading-relaxed">Envio dos arquivos organizados no Google Drive
                             (PDF vetorial, SVG, PNG), prontos para uso.</p>
                     </div>
                 </div>
@@ -413,18 +435,18 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-20 md:py-40 bg-surface-container" id="depoimentos">
+    <section class="py-14 md:py-32 bg-surface-container" id="depoimentos">
         <div class="container mx-auto px-5 md:px-8 max-w-7xl">
-            <div class="mb-16 md:mb-28">
-                <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Prova Social</span>
+            <div class="mb-10 md:mb-20">
                 <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight">Resultados que
                     Falam por Si</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
                 <!-- Featured testimonial -->
                 <div
-                    class="md:col-span-7 bg-surface p-8 md:p-14 rounded-2xl relative animate-on-scroll">
-                    <p class="font-headline text-2xl md:text-3xl text-on-surface leading-snug mb-10">"A HORU traduziu minha
+                    class="md:col-span-7 bg-surface p-8 md:p-14 relative animate-on-scroll">
+                    <span class="block font-display text-[7rem] md:text-[9rem] text-primary leading-none -mb-10 md:-mb-14 select-none" aria-hidden="true">"</span>
+                    <p class="font-headline text-xl sm:text-2xl md:text-3xl text-on-surface leading-snug mb-8 md:mb-10">A HORU traduziu minha
                         força e profissionalismo. Meus alunos notaram a diferença imediatamente. O design estratégico
                         impactou meu negócio."</p>
                     <div class="flex items-center gap-4">
@@ -441,7 +463,7 @@
                 <!-- Stacked smaller testimonials -->
                 <div class="md:col-span-5 flex flex-col gap-8">
                     <div
-                        class="bg-surface p-6 md:p-8 rounded-2xl relative animate-on-scroll delay-100">
+                        class="bg-surface p-6 md:p-8 relative animate-on-scroll delay-100">
                         <p class="text-on-surface/70 italic leading-relaxed text-sm mb-6">"Precisávamos de seriedade
                             sem sermos antigos. O processo foi impecável e o Manual de Marca nos poupa tempo e unifica toda
                             nossa comunicação contábil."</p>
@@ -457,7 +479,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-surface p-6 md:p-8 rounded-2xl relative animate-on-scroll delay-200">
+                        class="bg-surface p-6 md:p-8 relative animate-on-scroll delay-200">
                         <p class="text-on-surface/70 italic leading-relaxed text-sm mb-6">"Passar confiança é vital.
                             A identidade visual superou expectativas, aliando seriedade e modernidade. Excelente
                             investimento técnico e criativo."</p>
@@ -478,17 +500,16 @@
     </section>
 
     <!-- Pacotes Section -->
-    <section class="py-20 md:py-40 bg-surface" id="pacotes">
+    <section class="py-16 md:py-40 bg-surface" id="pacotes">
         <div class="container mx-auto px-5 md:px-8">
-            <div class="mb-16 md:mb-28">
-                <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Investimento</span>
+            <div class="mb-10 md:mb-20">
                 <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight">Invista na sua
                     marca</h2>
             </div>
             <!-- Premium — hero card, full-width -->
             <div class="mb-8 animate-on-scroll">
                 <div
-                    class="bg-surface-container-high p-8 md:p-14 relative overflow-hidden">
+                    class="bg-surface-container-high p-8 md:p-14 relative overflow-hidden border-l-[3px] border-primary">
                     <span class="absolute top-6 right-8 text-[10px] font-label font-bold tracking-[0.3em] uppercase text-on-surface/30">Recomendado</span>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
                         <div>
@@ -496,35 +517,18 @@
                             <p class="text-on-surface/50 text-base mb-8 leading-relaxed max-w-md">Posicionamento de mercado e sistema de
                                 branding completo. A escolha de quem leva a marca a sério.</p>
                             <div class="text-4xl md:text-5xl font-bold text-on-surface mb-10">R$ 4.500<span class="text-xl text-on-surface/30">,00</span></div>
-                            <div class="flex items-center gap-3 text-xs text-on-surface/40 font-label tracking-widest uppercase mb-8">
-                                <span class="material-symbols-outlined text-[16px]">schedule</span>
-                                Prazo: 20 dias úteis
-                            </div>
+                            <p class="text-xs text-on-surface/25 font-label tracking-widest uppercase mb-8">20 dias úteis</p>
                             <button
                                 onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'}); document.getElementById('plano').value = 'Premium';"
                                 class="bg-primary text-on-primary px-10 py-4 text-xs font-bold tracking-widest uppercase transition-all hover:scale-105 active:scale-95 hover:shadow-[0_8px_24px_rgba(123,47,255,0.3)]">Contratar
                                 Agora</button>
                         </div>
-                        <ul class="space-y-4 text-sm text-on-surface/80 lg:pt-4">
-                            <li class="flex items-start gap-3"><span
-                                    class="material-symbols-outlined text-on-surface/40 text-sm mt-0.5">check</span>
-                                <span>Sistema completo de Logos (Favicon, etc)</span>
-                            </li>
-                            <li class="flex items-start gap-3"><span
-                                    class="material-symbols-outlined text-on-surface/40 text-sm mt-0.5">check</span>
-                                <span>Paleta Cromática Acessível</span>
-                            </li>
-                            <li class="flex items-start gap-3"><span
-                                    class="material-symbols-outlined text-on-surface/40 text-sm mt-0.5">check</span> <span
-                                    class="font-bold text-on-surface">Manual de Identidade Visual Completo</span></li>
-                            <li class="flex items-start gap-3"><span
-                                    class="material-symbols-outlined text-on-surface/40 text-sm mt-0.5">check</span>
-                                <span>Papelaria Institucional & <span class="font-bold text-on-surface">5 Artes para
-                                        Redes Sociais</span></span>
-                            </li>
-                            <li class="flex items-start gap-3"><span
-                                    class="material-symbols-outlined text-on-surface/40 text-sm mt-0.5">check</span> <span>5
-                                    Mockups Premium (Fachada, Uniforme, Embalagem)</span></li>
+                        <ul class="space-y-3 text-sm text-on-surface/60 lg:pt-4">
+                            <li>Sistema completo de Logos (Favicon, etc)</li>
+                            <li>Paleta Cromática Acessível</li>
+                            <li class="text-on-surface">Manual de Identidade Visual Completo</li>
+                            <li>Papelaria Institucional & <span class="text-on-surface">5 Artes para Redes Sociais</span></li>
+                            <li>5 Mockups Premium (Fachada, Uniforme, Embalagem)</li>
                         </ul>
                     </div>
                 </div>
@@ -539,33 +543,14 @@
                         <p class="text-on-surface/40 text-sm mb-6 leading-relaxed">O alicerce ideal para quem está
                             começando.</p>
                         <div class="text-2xl font-bold text-on-surface mb-6">R$ 1.800<span class="text-sm text-on-surface/30">,00</span></div>
-                        <ul class="space-y-3 mb-6 text-sm text-on-surface/60">
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Logotipo Vetorial Principal</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Paleta Cromática (3 a 5 cores)</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Sugestões Tipográficas</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>1 Mockup de aplicação profissional</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Entrega em alta resolução (PDF, PNG, SVG)</span>
-                            </li>
+                        <ul class="space-y-2 mb-6 text-sm text-on-surface/40">
+                            <li>Logotipo Vetorial Principal</li>
+                            <li>Paleta Cromática (3 a 5 cores)</li>
+                            <li>Sugestões Tipográficas</li>
+                            <li>1 Mockup profissional</li>
+                            <li>Entrega em alta resolução</li>
                         </ul>
-                        <div
-                            class="flex items-center gap-2 text-xs text-on-surface/30 font-label tracking-widest uppercase mb-8">
-                            <span class="material-symbols-outlined text-[16px]">schedule</span>
-                            7 dias úteis
-                        </div>
+                        <p class="text-[10px] text-on-surface/20 font-label tracking-widest uppercase mb-8">7 dias úteis</p>
                     </div>
                     <button
                         onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'}); document.getElementById('plano').value = 'Essência';"
@@ -579,32 +564,14 @@
                         <p class="text-on-surface/40 text-sm mb-6 leading-relaxed">Identidade visual completa para marcas
                             que querem destaque.</p>
                         <div class="text-2xl font-bold text-on-surface mb-6">R$ 3.000<span class="text-sm text-on-surface/30">,00</span></div>
-                        <ul class="space-y-3 mb-6 text-sm text-on-surface/60">
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Logo Principal + Variações</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Paleta Cromática Expandida</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Hierarquia Tipográfica completa</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Mini Manual Básico de Marca</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span> <span
-                                    class="font-bold text-on-surface/80">3 Mockups Premium</span></li>
+                        <ul class="space-y-2 mb-6 text-sm text-on-surface/40">
+                            <li>Logo Principal + Variações</li>
+                            <li>Paleta Cromática Expandida</li>
+                            <li>Hierarquia Tipográfica completa</li>
+                            <li>Mini Manual Básico de Marca</li>
+                            <li class="text-on-surface/60">3 Mockups Premium</li>
                         </ul>
-                        <div
-                            class="flex items-center gap-2 text-xs text-on-surface/30 font-label tracking-widest uppercase mb-8">
-                            <span class="material-symbols-outlined text-[16px]">schedule</span>
-                            12 dias úteis
-                        </div>
+                        <p class="text-[10px] text-on-surface/20 font-label tracking-widest uppercase mb-8">12 dias úteis</p>
                     </div>
                     <button
                         onclick="document.getElementById('contato').scrollIntoView({behavior: 'smooth'}); document.getElementById('plano').value = 'Estrutura';"
@@ -617,21 +584,11 @@
                         <h3 class="font-headline text-xl font-bold mb-3 text-on-surface">Artes Mensais</h3>
                         <p class="text-on-surface/40 text-sm mb-6 leading-relaxed">Manutenção visual contínua para redes
                             sociais.</p>
-                        <div class="text-2xl font-bold text-on-surface mb-2">R$ 1.800<span class="text-sm text-on-surface/30">,00/mês</span></div>
-                        <div class="flex items-center gap-2 mb-6 text-on-surface/30">
-                            <span class="material-symbols-outlined text-[16px]"
-                                style="font-variation-settings: 'FILL' 1;">event_repeat</span>
-                            <span class="text-xs font-label font-bold tracking-[0.2em] uppercase">Recorrente</span>
-                        </div>
-                        <ul class="space-y-3 mb-6 text-sm text-on-surface/60">
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>12 posts mensais</span>
-                            </li>
-                            <li class="flex items-start gap-2"><span
-                                    class="material-symbols-outlined text-on-surface/30 text-sm mt-0.5">check</span>
-                                <span>Capas de Destaque</span>
-                            </li>
+                        <div class="text-2xl font-bold text-on-surface mb-1">R$ 1.800<span class="text-sm text-on-surface/30">,00/mês</span></div>
+                        <p class="text-[10px] text-on-surface/20 font-label tracking-widest uppercase mb-6">Recorrente</p>
+                        <ul class="space-y-2 mb-6 text-sm text-on-surface/40">
+                            <li>12 posts mensais</li>
+                            <li>Capas de Destaque</li>
                         </ul>
                     </div>
                     <button
@@ -644,24 +601,21 @@
     </section>
 
     <!-- O Estrategista Section -->
-    <section class="py-20 md:py-40 bg-surface relative overflow-hidden" id="estrategista">
+    <section class="py-14 md:py-36 bg-surface relative overflow-hidden" id="estrategista">
         <div class="container mx-auto px-5 md:px-8 max-w-screen-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
                 <div class="lg:col-span-5 relative animate-on-scroll">
                     <div
-                        class="relative overflow-hidden bg-surface-container-lowest aspect-[3/4]">
+                        class="relative overflow-hidden bg-surface-container-lowest aspect-[4/3] lg:aspect-[3/4]">
                         <img loading="lazy" src="imagens/estrategista_ike_novo-convertido-de-png-800w.webp"
                             srcset="imagens/estrategista_ike_novo-convertido-de-png-400w.webp 400w, imagens/estrategista_ike_novo-convertido-de-png-800w.webp 800w"
-                            sizes="(max-width: 768px) 100vw, 42vw"
+                            sizes="(max-width: 1024px) 100vw, 42vw"
                             alt="O Estrategista - Designer com mais de 4 anos de experiência"
                             width="800" height="800"
-                            class="w-full h-full object-cover" />
+                            class="w-full h-full object-cover object-top" />
                     </div>
                 </div>
                 <div class="lg:col-span-6 lg:col-start-7 lg:pt-20">
-                    <span
-                        class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block animate-on-scroll">Diferencial
-                        Técnico</span>
                     <h2
                         class="font-headline font-extrabold text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-tight leading-[0.95] mb-8 animate-on-scroll">
                         Design Aliado<br>à Tecnologia<br>de Ponta</h2>
@@ -672,15 +626,15 @@
                     </p>
                     <div class="flex items-center gap-10 animate-on-scroll delay-200">
                         <div class="flex flex-col">
-                            <span class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface/15 leading-none">AI</span>
+                            <span class="font-display text-5xl md:text-6xl text-primary/60 leading-none tracking-wide">AI</span>
                             <span
-                                class="text-[10px] uppercase tracking-[0.3em] text-on-surface/40 font-label mt-1">Otimização</span>
+                                class="text-[10px] uppercase tracking-[0.3em] text-on-surface/50 font-label mt-2">Otimização</span>
                         </div>
-                        <div class="w-px h-10 bg-on-surface/10"></div>
+                        <div class="w-px h-12 bg-on-surface/10"></div>
                         <div class="flex flex-col">
-                            <span class="font-headline text-3xl md:text-4xl font-extrabold text-on-surface/15 leading-none">DEV</span>
+                            <span class="font-display text-5xl md:text-6xl text-primary/60 leading-none tracking-wide">DEV</span>
                             <span
-                                class="text-[10px] uppercase tracking-[0.3em] text-on-surface/40 font-label mt-1">Full-Stack</span>
+                                class="text-[10px] uppercase tracking-[0.3em] text-on-surface/50 font-label mt-2">Full-Stack</span>
                         </div>
                     </div>
                 </div>
@@ -689,56 +643,53 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-20 md:py-40 bg-surface-container" id="faq">
+    <section class="py-12 md:py-28 bg-surface-container" id="faq">
         <div class="container mx-auto px-5 md:px-8 max-w-4xl">
-            <div class="mb-16 md:mb-24 animate-on-scroll">
-                <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Perguntas
-                    Essenciais</span>
-                <h2 class="font-headline font-extrabold text-3xl sm:text-5xl text-on-surface tracking-tight">Dúvidas Frequentes sobre
-                    Identidade Visual</h2>
+            <div class="mb-10 md:mb-16 animate-on-scroll">
+                <h2 class="font-headline font-extrabold text-2xl sm:text-4xl text-on-surface tracking-tight">Dúvidas Frequentes</h2>
             </div>
             <div class="space-y-4">
                 <!-- Accordion 1 -->
                 <details
-                    class="group bg-surface rounded-xl hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll">
+                    class="group bg-surface hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll">
                     <summary
-                        class="flex justify-between items-center cursor-pointer p-6 font-headline font-bold text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
+                        class="flex justify-between items-center cursor-pointer p-5 md:p-6 font-headline font-bold text-base md:text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
                         Quais arquivos eu recebo?
-                        <span
-                            class="material-symbols-outlined text-on-surface/50 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 group-open:hidden">+</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 hidden group-open:inline">−</span>
                     </summary>
                     <div
-                        class="px-6 pb-6 text-on-surface/60 text-sm leading-relaxed mt-2 pt-4 group-open:animate-[fade-in_0.3s_ease-out]">
+                        class="px-5 md:px-6 pb-5 md:pb-6 text-on-surface/40 text-sm leading-relaxed group-open:animate-[fade-in_0.3s_ease-out]">
                         Você recebe um pacote completo com arquivos em alta resolução: PDFs vetoriais, SVGs
                         (escaláveis), PNGs com fundo transparente e arquivos fonte, dependendo do plano escolhido.
                     </div>
                 </details>
                 <!-- Accordion 2 -->
                 <details
-                    class="group bg-surface rounded-xl hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll delay-100">
+                    class="group bg-surface hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll delay-100">
                     <summary
-                        class="flex justify-between items-center cursor-pointer p-6 font-headline font-bold text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
+                        class="flex justify-between items-center cursor-pointer p-5 md:p-6 font-headline font-bold text-base md:text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
                         Como funciona o uso de IA no processo?
-                        <span
-                            class="material-symbols-outlined text-on-surface/50 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 group-open:hidden">+</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 hidden group-open:inline">−</span>
                     </summary>
                     <div
-                        class="px-6 pb-6 text-on-surface/60 text-sm leading-relaxed mt-2 pt-4 group-open:animate-[fade-in_0.3s_ease-out]">
+                        class="px-5 md:px-6 pb-5 md:pb-6 text-on-surface/40 text-sm leading-relaxed group-open:animate-[fade-in_0.3s_ease-out]">
                         Utilizamos inteligência artificial avançada para acelerar a geração de conceitos e otimizar a
                         precisão técnica, garantindo um design único e alinhado às tendências de mercado.
                     </div>
                 </details>
                 <!-- Accordion 3 -->
                 <details
-                    class="group bg-surface rounded-xl hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll delay-200">
+                    class="group bg-surface hover:bg-surface-container-high open:bg-surface-container-high transition-colors animate-on-scroll delay-200">
                     <summary
-                        class="flex justify-between items-center cursor-pointer p-6 font-headline font-bold text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
+                        class="flex justify-between items-center cursor-pointer p-5 md:p-6 font-headline font-bold text-base md:text-lg text-on-surface list-none select-none [&::-webkit-details-marker]:hidden">
                         O registro da marca está incluso?
-                        <span
-                            class="material-symbols-outlined text-on-surface/50 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 group-open:hidden">+</span>
+                        <span class="text-on-surface/30 text-xl font-light shrink-0 ml-4 hidden group-open:inline">−</span>
                     </summary>
                     <div
-                        class="px-6 pb-6 text-on-surface/60 text-sm leading-relaxed mt-2 pt-4 group-open:animate-[fade-in_0.3s_ease-out]">
+                        class="px-5 md:px-6 pb-5 md:pb-6 text-on-surface/40 text-sm leading-relaxed group-open:animate-[fade-in_0.3s_ease-out]">
                         Não. Nosso serviço é o desenvolvimento estratégico e criativo da identidade. Recomendamos um
                         especialista em PI para o registro no INPI, mas garantimos que o design é original.
                     </div>
@@ -748,26 +699,18 @@
     </section>
 
     <!-- Contato Section -->
-    <section class="py-20 md:py-40 bg-surface-container" id="contato">
+    <section class="py-16 md:py-36 bg-surface-container" id="contato">
         <div class="container mx-auto px-5 md:px-8 max-w-6xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
                 <div>
-                    <span class="text-on-surface/30 font-label tracking-[0.4em] uppercase text-[10px] mb-6 block">Próximo
-                        Passo</span>
                     <h2 class="font-headline font-extrabold text-3xl sm:text-5xl md:text-6xl text-on-surface tracking-tight leading-[0.95] mb-8">Vamos<br>conversar?
                     </h2>
                     <p class="font-body text-base md:text-lg text-on-surface/40 leading-relaxed mb-12 max-w-sm">
                         Toda grande marca começa com uma conversa. Conte-nos sobre seu projeto.
                     </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3 text-on-surface/30 text-sm">
-                            <span class="material-symbols-outlined text-[18px]">mail</span>
-                            horu.branding@gmail.com
-                        </div>
-                        <div class="flex items-center gap-3 text-on-surface/30 text-sm">
-                            <span class="material-symbols-outlined text-[18px]">location_on</span>
-                            Florianópolis, Brasil
-                        </div>
+                    <div class="space-y-2 text-on-surface/25 text-sm">
+                        <p>horu.branding@gmail.com</p>
+                        <p>Florianópolis, Brasil</p>
                     </div>
                 </div>
                 <form id="contactForm" class="space-y-6" novalidate>
