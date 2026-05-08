@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Sora', sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1d2738;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300; /* Light by default */
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold; /* Sora Bold */
+    font-family: 'Sora', sans-serif;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 sm:px-12;
+  }
+  
+  .btn-gold {
+    @apply bg-accent text-primary px-8 py-3 rounded-none font-bold transition-all duration-300 hover:bg-accent-dark hover:scale-105 active:scale-95;
+  }
+  
+  .glass-card {
+    @apply bg-ice-light backdrop-blur-md border border-white/5;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1d2738;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7ad6d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b39b62;
+}
